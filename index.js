@@ -7,7 +7,7 @@ const userRouter = require('./routes/user-router')
 const potRouter = require('./routes/pot-router')
 
 const app = express()
-const apiPort = 3000
+const apiPort = 443
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
