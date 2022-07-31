@@ -12,6 +12,7 @@ const UserSchema = mongoose.Schema({
     phone: { type: String },
     zip: { type: String },
     country: { type: String },
+    pots: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Pot' }],
 });
 
 UserSchema.methods.setPassword = function (password) {

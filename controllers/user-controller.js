@@ -82,6 +82,18 @@ updateUser = (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 }
 
+addPot = (req, res) => {
+    User.findById(req.params.id)
+        .then(user => {
+            user.pots.push(req.body.pot_id);
+            user.save()
+                .then(() => res.json('Pot added!'))
+                .catch(err => res.status(400).json('Error: ' + err));
+        })
+        .catch(err => res.status(400).json('Error: ' + err));
+}
+
+
 module.exports = {
     createUser,
     loginUser,
