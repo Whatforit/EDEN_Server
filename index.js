@@ -1,25 +1,25 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const cors = require('cors')
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
-const db = require('./db')
-const userRouter = require('./routes/user-router')
-const potRouter = require('./routes/pot-router')
+const db = require("./db");
+const userRouter = require("./routes/user-router");
+const potRouter = require("./routes/pot-router");
 
-const app = express()
-const apiPort = 443
+const app = express();
+const apiPort = 443;
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors())
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+app.use(bodyParser.json());
 
-db.on('error', console.error.bind(console, 'MongoDB connection error:'))
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 
-app.use('/api/users', userRouter)
-app.use('/api/pots', potRouter)
+app.use("/api/users", userRouter);
+app.use("/api/pots", potRouter);
 
-app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))
+app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));
