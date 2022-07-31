@@ -1,3 +1,4 @@
+const { builtinModules } = require('module');
 const Pot = require('../models/pot-model');
 
 createPot = (req, res) => {
@@ -43,4 +44,12 @@ updatePot = (req, res) => {
                 .catch(err => res.status(400).json('Error: ' + err));
         })
         .catch(err => res.status(400).json('Error: ' + err));
+}
+
+module.exports = {
+    createPot,
+    getPot,
+    getPots,
+    deletePot,
+    updatePot,
 }
