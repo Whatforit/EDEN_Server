@@ -7,3 +7,5 @@ router.get('/getPots', PotCtrl.getPots)
 router.get('/getPot/:id', PotCtrl.getPot)
 router.delete('/deletePot/:id', PotCtrl.deletePot)
 router.put('/updatePot/:id', PotCtrl.updatePot)
+
+module.exports = router
