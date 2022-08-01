@@ -1,8 +1,10 @@
+const { response } = require("express");
 const User = require("../models/user-model");
 
 createUser = (req, res) => {
+  console.log(req.body);
   const newUser = new User();
-  newUser.username = req.body.username;
+  newUser.userName = req.body.userName;
   newUser.email = req.body.email;
   newUser.firstName = req.body.firstName;
   newUser.lastName = req.body.lastName;
@@ -10,32 +12,25 @@ createUser = (req, res) => {
   newUser.zip = req.body.zip;
   newUser.country = req.body.country;
   newUser.setPassword(req.body.password);
+  console.log(newUser);
   newUser
     .save()
-    .then(() => res.json("User added!"))
+    .then(() => res.status(200).json("User created!"))
     .catch((err) => res.status(400).json("Error: " + err));
 };
 
 loginUser = (req, res) => {
-  User.findOne({ username: req.body.username })
+  User.findOne({ userName: req.body.userName })
     .then((user) => {
+      console.log("user", user);
       if (user) {
         if (user.validPassword(req.body.password)) {
-          res.json({
-            username: user.username,
-            email: user.email,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            phone: user.phone,
-            zip: user.zip,
-            country: user.country,
-            id: user._id,
-          });
+          response.status(200).json({"Log in successful": user});
         } else {
           res.status(400).json("Invalid password");
         }
       } else {
-        res.status(400).json("Invalid username");
+        res.status(400).json("Invalid userName");
       }
     })
     .catch((err) => res.status(400).json("Error: " + err));
@@ -44,7 +39,7 @@ loginUser = (req, res) => {
 updateUser = (req, res) => {
   User.findById(req.params.id)
     .then((user) => {
-      user.username = req.body.username;
+      user.userName = req.body.userName;
       user.email = req.body.email;
       user.firstName = req.body.firstName;
       user.lastName = req.body.lastName;
@@ -69,7 +64,7 @@ getUser = (req, res) => {
 updateUser = (req, res) => {
   User.findById(req.params.id)
     .then((user) => {
-      user.username = req.body.username;
+      user.userName = req.body.userName;
       user.email = req.body.email;
       user.firstName = req.body.firstName;
       user.lastName = req.body.lastName;
