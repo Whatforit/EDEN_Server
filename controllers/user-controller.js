@@ -1,4 +1,3 @@
-const { response } = require("express");
 const User = require("../models/user-model");
 
 createUser = (req, res) => {
@@ -25,7 +24,7 @@ loginUser = (req, res) => {
       console.log("user", user);
       if (user) {
         if (user.validPassword(req.body.password)) {
-          response.status(200).json({"Log in successful": user});
+          res.status(200).json({"Log in successful": user});
         } else {
           res.status(400).json("Invalid password");
         }
